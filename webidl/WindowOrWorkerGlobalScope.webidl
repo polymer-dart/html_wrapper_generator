@@ -26,20 +26,20 @@ interface WindowOrWorkerGlobalScope {
   // be black-box the same.
   [Throws]
   long setTimeout(Function handler, optional long timeout = 0, any... arguments);
-  [Throws]
-  long setTimeout(DOMString handler, optional long timeout = 0, any... unused);
+//  [Throws]
+//  long setTimeout(DOMString handler, optional long timeout = 0, any... unused);
   void clearTimeout(optional long handle = 0);
   [Throws]
   long setInterval(Function handler, optional long timeout, any... arguments);
-  [Throws]
-  long setInterval(DOMString handler, optional long timeout, any... unused);
+ // [Throws]
+//  long setInterval(DOMString handler, optional long timeout, any... unused);
   void clearInterval(optional long handle = 0);
 
   // ImageBitmap
+//  [Throws]
+//  Promise<ImageBitmap> createImageBitmap(ImageBitmapSource aImage);
   [Throws]
-  Promise<ImageBitmap> createImageBitmap(ImageBitmapSource aImage);
-  [Throws]
-  Promise<ImageBitmap> createImageBitmap(ImageBitmapSource aImage, long aSx, long aSy, long aSw, long aSh);
+  Promise<ImageBitmap> createImageBitmap(ImageBitmapSource aImage, optional long aSx, optional long aSy, optional long aSw, optional long aSh);
 };
 
 // https://fetch.spec.whatwg.org/#fetch-method
@@ -67,7 +67,7 @@ partial interface WindowOrWorkerGlobalScope {
 };
 
 // Mozilla extensions
-partial interface WindowOrWorkerGlobalScope {
+//partial interface WindowOrWorkerGlobalScope {
   // Extensions to ImageBitmap bits.
   // Bug 1141979 - [FoxEye] Extend ImageBitmap with interfaces to access its
   // underlying image data
@@ -77,6 +77,6 @@ partial interface WindowOrWorkerGlobalScope {
   // so I cannot add preference on the extended version of createImageBitmap().
   // To work around, I will then check the preference at run time and throw if
   // the preference is set to be false.
-  [Throws]
-  Promise<ImageBitmap> createImageBitmap(ImageBitmapSource aImage, long aOffset, long aLength, ImageBitmapFormat aFormat, ImagePixelLayout aLayout);
-};
+//  [Throws]
+//  Promise<ImageBitmap> createImageBitmap(ImageBitmapSource aImage, long aOffset, long aLength, ImageBitmapFormat aFormat, ImagePixelLayout aLayout);
+//};

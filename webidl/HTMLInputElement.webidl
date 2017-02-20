@@ -123,11 +123,11 @@ interface HTMLInputElement : HTMLElement {
            attribute long? selectionEnd;
   [Throws]
            attribute DOMString? selectionDirection;
+//  [Throws]
+//  void setRangeText(DOMString replacement);
   [Throws]
-  void setRangeText(DOMString replacement);
-  [Throws]
-  void setRangeText(DOMString replacement, unsigned long start,
-    unsigned long end, optional SelectionMode selectionMode = "preserve");
+  void setRangeText(DOMString replacement, optional unsigned long start,
+    optional unsigned long end, optional SelectionMode selectionMode = "preserve");
 
   // also has obsolete members
 };

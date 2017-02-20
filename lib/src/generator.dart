@@ -54,6 +54,9 @@ class TypeManager {
             'any': 'var',
             'unrestricted float':'num',
             'object' : 'Object',
+            'Float32Array':'var',
+            'Float64Array':'var',
+            'USVString' : 'String',
           }[type['idlType']] ??
           type['idlType'];
     }
@@ -77,6 +80,7 @@ String sanitizeName(String name) =>
       'default': 'defaultValue',
       'continue' :'doContinue',
       'is' :'IS',
+      'extends' : 'Extends',
     }[name] ??
     name;
 
