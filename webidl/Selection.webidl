@@ -62,7 +62,7 @@ partial interface Selection {
 };
 
 // Additional chrome-only methods from nsISelectionPrivate
-interface nsISelectionListener;
+//interface nsISelectionListener;
 partial interface Selection {
   [ChromeOnly]
   const short ENDOFPRECEDINGLINE = 0;
@@ -77,10 +77,10 @@ partial interface Selection {
 
   [ChromeOnly,Throws]
   DOMString  toStringWithFormat(DOMString formatType, unsigned long flags, long wrapColumn);
-  [ChromeOnly,Throws]
-  void  addSelectionListener(nsISelectionListener newListener);
-  [ChromeOnly,Throws]
-  void  removeSelectionListener(nsISelectionListener listenerToRemove);
+//  [ChromeOnly,Throws]
+//  void  addSelectionListener(nsISelectionListener newListener);
+//  [ChromeOnly,Throws]
+//  void  removeSelectionListener(nsISelectionListener listenerToRemove);
 
   [ChromeOnly,BinaryName="rawType"]
   readonly attribute short type;

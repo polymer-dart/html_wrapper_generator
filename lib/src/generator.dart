@@ -158,11 +158,15 @@ class InterfaceDef implements Generator {
   Stream<String> generate(TypeManager manager) async* {
     yield "@JS('$name')\n";
     yield "class ${name}";
+    if (inherits == null && implementz.isNotEmpty) {
+      inherits = "Object";
+    }
     if (inherits != null) {
       yield " extends ${inherits}";
     }
     if (implementz.isNotEmpty) {
       String conj = " with ";
+
       for (String imp in implementz) {
         yield conj;
         yield imp;

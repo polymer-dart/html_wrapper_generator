@@ -11,8 +11,8 @@
  */
 
 interface CSS {
-  [Throws]
-  static boolean supports(DOMString property, DOMString value);
+//  [Throws]
+//  static boolean supports(DOMString property, DOMString value);
 
   [Throws]
   static boolean supports(DOMString conditionText);
