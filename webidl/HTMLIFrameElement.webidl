@@ -61,5 +61,5 @@ partial interface HTMLIFrameElement {
            attribute boolean mozbrowser;
 };
 
-HTMLIFrameElement implements MozFrameLoaderOwner;
-HTMLIFrameElement implements BrowserElement;
+//HTMLIFrameElement implements MozFrameLoaderOwner;
+//HTMLIFrameElement implements BrowserElement;

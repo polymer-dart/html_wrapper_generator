@@ -39,6 +39,6 @@ partial interface HTMLEmbedElement {
   Document? getSVGDocument();
 };
 
-HTMLEmbedElement implements MozImageLoadingContent;
-HTMLEmbedElement implements MozFrameLoaderOwner;
-HTMLEmbedElement implements MozObjectLoadingContent;
+//HTMLEmbedElement implements MozImageLoadingContent;
+//HTMLEmbedElement implements MozFrameLoaderOwner;
+//HTMLEmbedElement implements MozObjectLoadingContent;

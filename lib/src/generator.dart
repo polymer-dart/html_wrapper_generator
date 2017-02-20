@@ -12,6 +12,10 @@ class TypeManager {
     typedefs[def['name']] = translateType(def['idlType']);
   }
 
+  void addEnum(Map def) {
+    typedefs[def['name']] = "String"; // Better way to map this ?
+  }
+
   String translateType(Map type,
       {bool asReturnType: false, bool asTypeArgument: false}) {
     String res;
@@ -49,6 +53,7 @@ class TypeManager {
             'long long': 'num',
             'any': 'var',
             'unrestricted float':'num',
+            'object' : 'Object',
           }[type['idlType']] ??
           type['idlType'];
     }
@@ -70,6 +75,8 @@ class TypeManager {
 String sanitizeName(String name) =>
     {
       'default': 'defaultValue',
+      'continue' :'doContinue',
+      'is' :'IS',
     }[name] ??
     name;
 
@@ -151,7 +158,7 @@ class InterfaceDef implements Generator {
       yield " extends ${inherits}";
     }
     if (implementz.isNotEmpty) {
-      String conj = " implements ";
+      String conj = " with ";
       for (String imp in implementz) {
         yield conj;
         yield imp;
@@ -176,6 +183,69 @@ class InterfaceDef implements Generator {
     String type = member['type'];
 
     if (type == 'attribute') {
+      String name = member['name'];
+      name = sanitizeName(name);
+      String type;
+      Map idlType = (member['idlType'] ?? {});
+      type = typeManager.translateType(idlType);
+      String returnType = type == 'var' ? '' : type;
+      yield "    external ${returnType} get ${name};\n";
+      if (!(member['readonly'] ?? false)) {
+        yield "    external set ${name} (${type} val);\n";
+      }
+    } else if (type == 'operation') {
+      yield* generateOperation(typeManager, member, prefix: '    external ');
+    }
+  }
+}
+
+
+class DictionaryDef implements Generator {
+  String name;
+  String inherits;
+  List extAttrs = [];
+  List<String> implementz = [];
+  List members = [];
+
+  DictionaryDef(Map<String,dynamic> record) {
+    inherits = record['inheritance'];
+    name =record['name'];
+    extAttrs = record['extAttrs'];
+    members=record['members'];
+  }
+
+  Stream<String> generate(TypeManager manager) async* {
+    yield "@anonymous\n";
+    yield "class ${name}";
+    if (inherits != null) {
+      yield " extends ${inherits}";
+    }
+    if (implementz.isNotEmpty) {
+      String conj = " implements ";
+      for (String imp in implementz) {
+        yield conj;
+        yield imp;
+        conj = ", ";
+      }
+    }
+    yield " {\n";
+
+    yield* generateAttributes(manager);
+
+    yield "}\n";
+  }
+
+  Stream<String> generateAttributes(TypeManager typeManager) async* {
+    for (Map<String, dynamic> member in members) {
+      yield* writeMember(typeManager, member);
+    }
+  }
+
+  Stream<String> writeMember(
+      TypeManager typeManager, Map<String, dynamic> member) async* {
+    String type = member['type'];
+
+    if (type == 'field') {
       String name = member['name'];
       name = sanitizeName(name);
       String type;
@@ -245,6 +315,10 @@ void mergeInterfaces(
       res[name] = new Generator(record);
     } else if (type == 'typedef') {
       typeManager.addTypedef(record);
+    } else if (type=='dictionary') {
+      res[name]= new DictionaryDef(record);
+    } else if(type=='enum') {
+      typeManager.addEnum(record);
     }
   });
 }

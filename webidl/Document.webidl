@@ -355,21 +355,21 @@ partial interface Document {
   // distinguishing arguments yet.  Once this hack is removed. we can also
   // remove the corresponding overload on nsIDocument, since Touch... and
   // sequence<Touch> look the same in the C++.
-  [NewObject, Func="nsGenericHTMLElement::TouchEventsEnabled"]
-  TouchList createTouchList(Touch touch, Touch... touches);
+  //[NewObject, Func="nsGenericHTMLElement::TouchEventsEnabled"]
+  //TouchList createTouchList(Touch touch, Touch... touches);
   // XXXbz and another hack for the fact that we can't usefully have optional
   // distinguishing arguments but need a working zero-arg form of
   // createTouchList().
-  [NewObject, Func="nsGenericHTMLElement::TouchEventsEnabled"]
-  TouchList createTouchList();
+  //[NewObject, Func="nsGenericHTMLElement::TouchEventsEnabled"]
+  //TouchList createTouchList();
   [NewObject, Func="nsGenericHTMLElement::TouchEventsEnabled"]
   TouchList createTouchList(sequence<Touch> touches);
 
   [ChromeOnly]
   attribute boolean styleSheetChangeEventsEnabled;
 
-  [ChromeOnly, Throws]
-  void obsoleteSheet(URI sheetURI);
+  //[ChromeOnly, Throws]
+  //void obsoleteSheet(URI sheetURI);
   [ChromeOnly, Throws]
   void obsoleteSheet(DOMString sheetURI);
 

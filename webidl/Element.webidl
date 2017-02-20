@@ -179,7 +179,7 @@ partial interface Element {
   DOMRect getBoundingClientRect();
 
   // scrolling
-  void scrollIntoView(boolean top);
+  //void scrollIntoView(boolean top);
   void scrollIntoView(optional ScrollIntoViewOptions options);
   // None of the CSSOM attributes are [Pure], because they flush
            attribute long scrollTop;   // scroll on setting
@@ -187,11 +187,11 @@ partial interface Element {
   readonly attribute long scrollWidth;
   readonly attribute long scrollHeight;
   
-  void scroll(unrestricted double x, unrestricted double y);
+//  void scroll(unrestricted double x, unrestricted double y);
   void scroll(optional ScrollToOptions options);
-  void scrollTo(unrestricted double x, unrestricted double y);
+//  void scrollTo(unrestricted double x, unrestricted double y);
   void scrollTo(optional ScrollToOptions options);
-  void scrollBy(unrestricted double x, unrestricted double y);
+ // void scrollBy(unrestricted double x, unrestricted double y);
   void scrollBy(optional ScrollToOptions options);
   // mozScrollSnap is used by chrome to perform scroll snapping after the
   // user performs actions that may affect scroll position

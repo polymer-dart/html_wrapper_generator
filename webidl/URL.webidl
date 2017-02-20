@@ -54,17 +54,10 @@ interface URL {
 
 partial interface URL {
   [Throws]
-  static DOMString createObjectURL(Blob blob);
-  [Throws]
-  static DOMString createObjectURL(MediaStream stream);
+  static DOMString createObjectURL(any blob);
   [Throws]
   static void revokeObjectURL(DOMString url);
   [ChromeOnly, Throws]
   static boolean isValidURL(DOMString url);
 };
 
-// https://dvcs.w3.org/hg/html-media/raw-file/default/media-source/media-source.html
-partial interface URL {
-  [Throws]
-  static DOMString? createObjectURL(MediaSource source);
-};

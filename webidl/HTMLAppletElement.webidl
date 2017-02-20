@@ -38,6 +38,6 @@ interface HTMLAppletElement : HTMLElement {
            attribute DOMString width;
 };
 
-HTMLAppletElement implements MozImageLoadingContent;
-HTMLAppletElement implements MozFrameLoaderOwner;
-HTMLAppletElement implements MozObjectLoadingContent;
+//HTMLAppletElement implements MozImageLoadingContent;
+//HTMLAppletElement implements MozFrameLoaderOwner;
+//HTMLAppletElement implements MozObjectLoadingContent;

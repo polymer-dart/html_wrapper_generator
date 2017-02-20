@@ -217,6 +217,6 @@ dictionary MozPluginParameter {
   DOMString value = "";
 };
 
-HTMLObjectElement implements MozImageLoadingContent;
-HTMLObjectElement implements MozFrameLoaderOwner;
-HTMLObjectElement implements MozObjectLoadingContent;
+//HTMLObjectElement implements MozImageLoadingContent;
+//HTMLObjectElement implements MozFrameLoaderOwner;
+//HTMLObjectElement implements MozObjectLoadingContent;
