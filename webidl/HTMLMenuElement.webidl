@@ -12,7 +12,7 @@
  * and create derivative works of this document.
  */
 
-interface MenuBuilder;
+//interface MenuBuilder;
 
 // http://www.whatwg.org/specs/web-apps/current-work/#the-menu-element
 [HTMLConstructor]

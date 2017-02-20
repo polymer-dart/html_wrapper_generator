@@ -6,14 +6,17 @@ import 'package:logging/logging.dart';
 
 Logger _logger = new Logger('generator');
 
+typedef String Translator();
+
 class TypeManager {
-  Map<String, String> typedefs = {};
+  Map<String, Translator> typedefs = {};
   void addTypedef(Map def) {
-    typedefs[def['name']] = translateType(def['idlType']);
+    typedefs[def['name']] = () => translateType(def['idlType']);
   }
 
   void addEnum(Map def) {
-    typedefs[def['name']] = "String"; // Better way to map this ?
+    _logger.fine("Mapping ${def} -> String");
+    typedefs[def['name']] = ()=> "String"; // Better way to map this ?
   }
 
   String translateType(Map type,
@@ -24,7 +27,7 @@ class TypeManager {
     } else if (type['generic'] != null) {
       if (type['idlType'] is Map) {
         String genType = type['generic'];
-        genType = {
+        genType = const {
               'sequence': 'List',
             }[genType] ??
             genType;
@@ -35,7 +38,7 @@ class TypeManager {
         res = "var";
       }
     } else {
-      res = {
+      res = const {
             "DOMString": "String",
             "long": "num",
             "short": "num",
@@ -52,15 +55,17 @@ class TypeManager {
             'unsigned long long': 'num',
             'long long': 'num',
             'any': 'var',
-            'unrestricted float':'num',
-            'object' : 'Object',
-            'Float32Array':'var',
-            'Float64Array':'var',
-            'USVString' : 'String',
+            'unrestricted float': 'num',
+            'object': 'Object',
+            'Float32Array': 'var',
+            'Float64Array': 'var',
+            'USVString': 'String',
           }[type['idlType']] ??
           type['idlType'];
     }
-    res = typedefs[res] ?? res;
+    while (typedefs.containsKey(res)) {
+      res = typedefs[res]();
+    }
     if (asTypeArgument) {
       if (res == 'void' || res == 'var') res = "dynamic";
     } else if (asReturnType) {
@@ -78,9 +83,10 @@ class TypeManager {
 String sanitizeName(String name) =>
     {
       'default': 'defaultValue',
-      'continue' :'doContinue',
-      'is' :'IS',
-      'extends' : 'Extends',
+      'continue': 'doContinue',
+      'is': 'IS',
+      'extends': 'Extends',
+      'MozSelfSupport': 'mozSelfSupport',
     }[name] ??
     name;
 
@@ -207,7 +213,6 @@ class InterfaceDef implements Generator {
   }
 }
 
-
 class DictionaryDef implements Generator {
   String name;
   String inherits;
@@ -215,11 +220,11 @@ class DictionaryDef implements Generator {
   List<String> implementz = [];
   List members = [];
 
-  DictionaryDef(Map<String,dynamic> record) {
+  DictionaryDef(Map<String, dynamic> record) {
     inherits = record['inheritance'];
-    name =record['name'];
+    name = record['name'];
     extAttrs = record['extAttrs'];
-    members=record['members'];
+    members = record['members'];
   }
 
   Stream<String> generate(TypeManager manager) async* {
@@ -296,7 +301,7 @@ Future generateAll(String folderPath) async {
 
 Future collect(String webIdlPath, Map<String, Generator> interfaces,
     TypeManager typeManager) async {
-  var webidlJson = JSON.decode(new File(webIdlPath).readAsStringSync());
+  var webidlJson = JSON.decode(await new File(webIdlPath).readAsString());
   mergeInterfaces(webidlJson, interfaces, typeManager);
 }
 
@@ -323,9 +328,9 @@ void mergeInterfaces(
       res[name] = new Generator(record);
     } else if (type == 'typedef') {
       typeManager.addTypedef(record);
-    } else if (type=='dictionary') {
-      res[name]= new DictionaryDef(record);
-    } else if(type=='enum') {
+    } else if (type == 'dictionary') {
+      res[name] = new DictionaryDef(record);
+    } else if (type == 'enum') {
       typeManager.addEnum(record);
     }
   });

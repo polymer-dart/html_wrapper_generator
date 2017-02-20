@@ -11,7 +11,7 @@ interface NamedNodeMap {
   [Throws]
   Attr removeNamedItem(DOMString name);
 
-  getter Attr? item(unsigned long index);
+//  getter Attr? item(unsigned long index);
   readonly attribute unsigned long length;
 
   Attr? getNamedItemNS(DOMString? namespaceURI, DOMString localName);

@@ -24,8 +24,8 @@ interface Grid
 {
   readonly attribute GridDimension rows;
   readonly attribute GridDimension cols;
-  [Cached, Constant]
-  readonly attribute sequence<GridArea> areas;
+//  [Cached, Constant]
+//  readonly attribute sequence<GridArea> areas;
 };
 
 [ChromeOnly]
@@ -55,8 +55,8 @@ interface GridLine
    * assigned if the line contributes to a named area.
    * https://drafts.csswg.org/css-grid/#implicit-named-lines
    */
-  [Cached, Constant]
-  readonly attribute sequence<DOMString> names;
+  //[Cached, Constant]
+  //readonly attribute sequence<DOMString> names;
 
   readonly attribute double start;
 

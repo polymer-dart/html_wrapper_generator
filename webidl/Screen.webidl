@@ -34,8 +34,8 @@ interface Screen : EventTarget {
    * Can be: landscape-primary, landscape-secondary,
    *         portrait-primary or portrait-secondary.
    */
-  [NeedsCallerType]
-  readonly attribute DOMString mozOrientation;
+//  [NeedsCallerType]
+//  readonly attribute DOMString mozOrientation;
 
   attribute EventHandler onmozorientationchange;
 
@@ -43,17 +43,17 @@ interface Screen : EventTarget {
    * DEPRECATED, use ScreenOrientation API instead.
    * Lock screen orientation to the specified type.
    */
-  [Throws, UnsafeInPrerendering]
-  boolean mozLockOrientation(DOMString orientation);
-  [Throws, UnsafeInPrerendering]
-  boolean mozLockOrientation(sequence<DOMString> orientation);
+//  [Throws, UnsafeInPrerendering]
+//  boolean mozLockOrientation(DOMString orientation);
+//  [Throws, UnsafeInPrerendering]
+//  boolean mozLockOrientation(sequence<DOMString> orientation);
 
   /**
    * DEPRECATED, use ScreenOrientation API instead.
    * Unlock the screen orientation.
    */
-  [UnsafeInPrerendering]
-  void mozUnlockOrientation();
+//  [UnsafeInPrerendering]
+//  void mozUnlockOrientation();
 };
 
 // https://w3c.github.io/screen-orientation
