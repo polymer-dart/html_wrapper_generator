@@ -1,0 +1,1 @@
+[{"type":"interface","name":"Comment","partial":false,"members":[],"inheritance":"CharacterData","extAttrs":[{"name":"Constructor","arguments":[{"optional":true,"variadic":false,"extAttrs":[],"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"DOMString"},"name":"data","default":{"type":"string","value":""}}]}]}]

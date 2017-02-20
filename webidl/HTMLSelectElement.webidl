@@ -37,7 +37,7 @@ interface HTMLSelectElement : HTMLElement {
   HTMLOptionElement? namedItem(DOMString name);
   [Throws]
   void add((HTMLOptionElement or HTMLOptGroupElement) element, optional (HTMLElement or long)? before = null);
-  void remove(long index);
+  //void remove(long index);
   [Throws]
   setter creator void (unsigned long index, HTMLOptionElement? option);
 
