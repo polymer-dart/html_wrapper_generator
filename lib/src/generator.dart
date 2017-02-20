@@ -6,14 +6,145 @@ import 'package:logging/logging.dart';
 
 Logger _logger = new Logger('generator');
 
-class InterfaceDef {
+class TypeManager {
+  Map<String, String> typedefs = {};
+  void addTypedef(Map def) {
+    typedefs[def['name']] = translateType(def['idlType']);
+  }
+
+  String translateType(Map type,
+      {bool asReturnType: false, bool asTypeArgument: false}) {
+    String res;
+    if (type['union'] ?? false) {
+      res = "var";
+    } else if (type['generic'] != null) {
+      if (type['idlType'] is Map) {
+        String genType = type['generic'];
+        genType = {
+              'sequence': 'List',
+            }[genType] ??
+            genType;
+
+        res =
+            "${genType}<${translateType(type['idlType'],asTypeArgument:true)}>";
+      } else {
+        res = "var";
+      }
+    } else {
+      res = {
+            "DOMString": "String",
+            "long": "num",
+            "short": "num",
+            'float': 'num',
+            'double': 'num',
+            'unsigned float': 'num',
+            'unsigned double': 'num',
+            "boolean": "bool",
+            "DOMStringMap": "var",
+            "unsigned long": "num",
+            "unsigned short": "num",
+            "sequence": "List",
+            'unrestricted double': 'num',
+            'unsigned long long': 'num',
+            'long long': 'num',
+            'any': 'var',
+            'unrestricted float':'num',
+          }[type['idlType']] ??
+          type['idlType'];
+    }
+    res = typedefs[res] ?? res;
+    if (asTypeArgument) {
+      if (res == 'void' || res == 'var') res = "dynamic";
+    } else if (asReturnType) {
+      if (res == 'var') res = "";
+    }
+    return res;
+  }
+
+  String argumentList(List args) => args
+      .map((arg) =>
+          "${translateType(arg['idlType'])} ${sanitizeName(arg['name'])}")
+      .join(',');
+}
+
+String sanitizeName(String name) =>
+    {
+      'default': 'defaultValue',
+    }[name] ??
+    name;
+
+Stream<String> generateOperation(TypeManager typeManager, member,
+    {String prefix: ""}) async* {
+  String name = member['name'];
+  name = sanitizeName(name);
+  String type;
+  Map idlType = (member['idlType']);
+  if (idlType == null) {
+    _logger.warning("Type is null in ${member}");
+    return;
+  }
+  bool isGetter = member['getter'];
+  bool isSetter = member['setter'];
+  bool isDeleter = member['deleter'];
+  bool isStringifier = member['stringifier'] ?? false;
+  type = typeManager.translateType(idlType, asReturnType: true);
+  assert(!isGetter || !isSetter, "not setter and getter");
+
+  if (isGetter) {
+    yield "${prefix}${type} operator[](${typeManager.argumentList(member['arguments'])});\n";
+  } else if (isSetter) {
+    yield "${prefix}${type} operator[]=(${typeManager.argumentList(member['arguments'])});\n";
+  } else if (isDeleter) {
+    yield "    // Deleter ?\n";
+  } else if (isStringifier) {
+    yield "    // isStringifier ?\n";
+  } else {
+    yield "${prefix}${type} ${name}(${typeManager.argumentList(member['arguments'])});\n";
+  }
+}
+
+abstract class Generator {
+  Stream<String> generate(TypeManager manager);
+
+  factory Generator(def) {
+    if (def['type'] == 'callback') {
+      return new CallbackGenerator(def);
+    } else if (def['type'] == 'typedef') {
+      return new TypedefGeneretor(def);
+    }
+    return null;
+  }
+}
+
+class CallbackGenerator implements Generator {
+  Map def;
+
+  CallbackGenerator(this.def);
+
+  Stream<String> generate(TypeManager manager) async* {
+    yield 'typedef ';
+    yield* generateOperation(manager, def);
+  }
+}
+
+class TypedefGeneretor implements Generator {
+  Map def;
+  TypedefGeneretor(this.def);
+
+  @override
+  Stream<String> generate(TypeManager manager) async* {
+    yield 'typedef ${manager.translateType(def['idlType'])} ${def['name']};\n';
+  }
+}
+
+class InterfaceDef implements Generator {
   String name;
   String inherits;
   List extAttrs = [];
   List<String> implementz = [];
   List members = [];
 
-  Stream<String> writeWrapper() async* {
+  Stream<String> generate(TypeManager manager) async* {
     yield "@JS('$name')\n";
     yield "class ${name}";
     if (inherits != null) {
@@ -29,80 +160,55 @@ class InterfaceDef {
     }
     yield " {\n";
 
-    yield* generateAttributes();
+    yield* generateAttributes(manager);
 
     yield "}\n";
   }
 
-  Stream<String> generateAttributes() async* {
+  Stream<String> generateAttributes(TypeManager typeManager) async* {
     for (Map<String, dynamic> member in members) {
-      yield* writeMember(member);
+      yield* writeMember(typeManager, member);
     }
   }
 
-  Stream<String> writeMember(Map<String, dynamic> member) async* {
+  Stream<String> writeMember(
+      TypeManager typeManager, Map<String, dynamic> member) async* {
     String type = member['type'];
 
     if (type == 'attribute') {
       String name = member['name'];
-      String type = member['idlType']['idlType'];
-      type = translateType(type);
-      yield "    external ${type} get ${name};\n";
-      yield "    external set ${name} (${type} val);\n";
+      name = sanitizeName(name);
+      String type;
+      Map idlType = (member['idlType'] ?? {});
+      type = typeManager.translateType(idlType);
+      String returnType = type == 'var' ? '' : type;
+      yield "    external ${returnType} get ${name};\n";
+      if (!(member['readonly'] ?? false)) {
+        yield "    external set ${name} (${type} val);\n";
+      }
     } else if (type == 'operation') {
-      String name = member['name'];
-      String type = (member['idlType'] ?? {})['idlType'];
-      if (type == null) {
-        _logger.warning("Type is null in ${member}");
-        return;
-      }
-      bool isGetter = member['getter'];
-      bool isSetter = member['setter'];
-      bool isDeleter = member['deleter'];
-      type = translateType(type);
-      assert(!isGetter || !isSetter, "not setter and getter");
-
-      if (isGetter) {
-        yield "    external ${type} operator[](${argumentList(member['arguments'])});\n";
-      } else if (isSetter) {
-        yield "    external ${type} operator[]=(${argumentList(member['arguments'])});\n";
-      } else if (isDeleter) {
-        yield "    // Deleter ?\n";
-      } else {
-        yield "    external ${type} ${name}(${argumentList(member['arguments'])});\n";
-      }
+      yield* generateOperation(typeManager, member, prefix: '    external ');
     }
-  }
-
-  String argumentList(List args) => args
-      .map(
-          (arg) => "${translateType(arg['idlType']['idlType'])} ${arg['name']}")
-      .join(',');
-
-  String translateType(String type) {
-    return {
-          "DOMString": "String",
-          "long": "num",
-          "boolean": "bool",
-          "DOMStringMap": "var",
-          "unsigned long": "num",
-        }[type] ??
-        type;
   }
 }
 
 Future generateAll(String folderPath) async {
-  Map<String, InterfaceDef> interfaces = {};
+  Map<String, Generator> interfaces = {};
+  TypeManager typeManager = new TypeManager();
   Directory dir = new Directory(folderPath);
+
+  stdout.writeln("""part of html_lib;""");
+
   await for (FileSystemEntity idl in dir.list()) {
     if (!idl.path.endsWith(".webidl.json") || (idl is! File)) continue;
     stderr.write("Reading ${idl.path}...");
-    await generate(idl.path, interfaces);
+    await collect(idl.path, interfaces, typeManager);
     stderr.writeln("OK");
   }
 
-  for (InterfaceDef def in interfaces.values) {
-    await stdout.addStream(def.writeWrapper().transform(new Utf8Encoder()));
+  for (Generator def in interfaces.values) {
+    await stdout
+        .addStream(def.generate(typeManager).transform(new Utf8Encoder()));
 
     stdout.writeln();
   }
@@ -110,16 +216,18 @@ Future generateAll(String folderPath) async {
   stdout.flush();
 }
 
-Future generate(String webIdlPath, Map<String, InterfaceDef> interfaces) async {
+Future collect(String webIdlPath, Map<String, Generator> interfaces,
+    TypeManager typeManager) async {
   var webidlJson = JSON.decode(new File(webIdlPath).readAsStringSync());
-  mergeInterfaces(webidlJson, interfaces);
+  mergeInterfaces(webidlJson, interfaces, typeManager);
 }
 
-void mergeInterfaces(var webidlJson, Map<String, InterfaceDef> res) {
+void mergeInterfaces(
+    var webidlJson, Map<String, Generator> res, TypeManager typeManager) {
   webidlJson.forEach((Map<String, dynamic> record) {
     String type = record['type'];
+    String name = record['name'];
     if (type == 'interface') {
-      String name = record['name'];
       InterfaceDef def =
           res.putIfAbsent(name, () => new InterfaceDef()..name = name);
       bool partial = record['partial'];
@@ -133,6 +241,10 @@ void mergeInterfaces(var webidlJson, Map<String, InterfaceDef> res) {
       InterfaceDef def =
           res.putIfAbsent(target, () => new InterfaceDef()..name = target);
       def.implementz.add(record['implements']);
+    } else if (type == 'callback') {
+      res[name] = new Generator(record);
+    } else if (type == 'typedef') {
+      typeManager.addTypedef(record);
     }
   });
 }

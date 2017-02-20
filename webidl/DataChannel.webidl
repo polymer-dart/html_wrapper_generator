@@ -30,13 +30,7 @@ interface DataChannel : EventTarget
   attribute EventHandler onbufferedamountlow;
   attribute RTCDataChannelType binaryType;
   [Throws]
-  void send(DOMString data);
-  [Throws]
-  void send(Blob data);
-  [Throws]
-  void send(ArrayBuffer data);
-  [Throws]
-  void send(ArrayBufferView data);
+  void send(any data);
 };
 
 // Mozilla extensions.

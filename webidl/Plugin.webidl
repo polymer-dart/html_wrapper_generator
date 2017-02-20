@@ -13,5 +13,5 @@ interface Plugin {
 
   readonly attribute unsigned long length;
   getter MimeType? item(unsigned long index);
-  getter MimeType? namedItem(DOMString name);
+//  getter MimeType? namedItem(DOMString name);
 };

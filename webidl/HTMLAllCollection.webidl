@@ -8,7 +8,4 @@ interface HTMLAllCollection {
   readonly attribute unsigned long length;
   getter Node? (unsigned long index);
   Node? item(unsigned long index);
-  (Node or HTMLCollection)? item(DOMString name);
-  legacycaller (Node or HTMLCollection)? (DOMString name);
-  getter (Node or HTMLCollection)? namedItem(DOMString name);
 };

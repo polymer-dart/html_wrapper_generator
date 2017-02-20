@@ -72,8 +72,8 @@
   [Throws, Pref="browser.cache.offline.enable"] readonly attribute ApplicationCache applicationCache;
 
   // user prompts
-  [Throws, UnsafeInPrerendering, NeedsSubjectPrincipal] void alert();
-  [Throws, UnsafeInPrerendering, NeedsSubjectPrincipal] void alert(DOMString message);
+//  [Throws, UnsafeInPrerendering, NeedsSubjectPrincipal] void alert();
+  [Throws, UnsafeInPrerendering, NeedsSubjectPrincipal] void alert(optional DOMString message);
   [Throws, UnsafeInPrerendering, NeedsSubjectPrincipal] boolean confirm(optional DOMString message = "");
   [Throws, UnsafeInPrerendering, NeedsSubjectPrincipal] DOMString? prompt(optional DOMString message = "", optional DOMString default = "");
   [Throws, UnsafeInPrerendering] void print();
@@ -169,11 +169,11 @@ partial interface Window {
 
   // viewport scrolling
   void scroll(unrestricted double x, unrestricted double y);
-  void scroll(optional ScrollToOptions options);
+  //void scroll(optional ScrollToOptions options);
   void scrollTo(unrestricted double x, unrestricted double y);
-  void scrollTo(optional ScrollToOptions options);
+  //void scrollTo(optional ScrollToOptions options);
   void scrollBy(unrestricted double x, unrestricted double y);
-  void scrollBy(optional ScrollToOptions options);
+  //void scrollBy(optional ScrollToOptions options);
   // mozScrollSnap is used by chrome to perform scroll snapping after the
   // user performs actions that may affect scroll position
   // mozScrollSnap is deprecated, to be replaced by a web accessible API, such
