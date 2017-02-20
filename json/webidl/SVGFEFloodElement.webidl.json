@@ -1,0 +1,1 @@
+[{"type":"interface","name":"SVGFEFloodElement","partial":false,"members":[],"inheritance":"SVGElement","extAttrs":[]},{"type":"implements","target":"SVGFEFloodElement","implements":"SVGFilterPrimitiveStandardAttributes","extAttrs":[]}]

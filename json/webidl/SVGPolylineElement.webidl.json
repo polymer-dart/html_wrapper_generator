@@ -1,0 +1,1 @@
+[{"type":"interface","name":"SVGPolylineElement","partial":false,"members":[],"inheritance":"SVGGraphicsElement","extAttrs":[]},{"type":"implements","target":"SVGPolylineElement","implements":"SVGAnimatedPoints","extAttrs":[]}]

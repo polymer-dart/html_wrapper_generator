@@ -1,0 +1,1 @@
+[{"type":"interface","name":"PerformanceMeasure","partial":false,"members":[],"inheritance":"PerformanceEntry","extAttrs":[{"name":"Exposed","arguments":null,"rhs":{"type":"identifier-list","value":["Window","Worker"]}}]}]

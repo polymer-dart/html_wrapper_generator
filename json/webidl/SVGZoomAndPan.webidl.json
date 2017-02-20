@@ -1,0 +1,1 @@
+[{"type":"interface","name":"SVGZoomAndPan","partial":false,"members":[],"inheritance":null,"extAttrs":[]},{"type":"implements","target":"SVGZoomAndPan","implements":"SVGZoomAndPanValues","extAttrs":[]}]

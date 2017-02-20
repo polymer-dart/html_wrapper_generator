@@ -1,0 +1,1 @@
+[{"type":"enum","name":"SocketReadyState","values":["opening","open","closing","closed","halfclosed"],"extAttrs":[]}]

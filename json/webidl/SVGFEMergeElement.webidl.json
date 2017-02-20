@@ -1,0 +1,1 @@
+[{"type":"interface","name":"SVGFEMergeElement","partial":false,"members":[],"inheritance":"SVGElement","extAttrs":[]},{"type":"implements","target":"SVGFEMergeElement","implements":"SVGFilterPrimitiveStandardAttributes","extAttrs":[]}]

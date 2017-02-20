@@ -1,0 +1,1 @@
+[{"type":"interface","name":"SVGSymbolElement","partial":false,"members":[],"inheritance":"SVGElement","extAttrs":[]},{"type":"implements","target":"SVGSymbolElement","implements":"SVGFitToViewBox","extAttrs":[]},{"type":"implements","target":"SVGSymbolElement","implements":"SVGTests","extAttrs":[]}]

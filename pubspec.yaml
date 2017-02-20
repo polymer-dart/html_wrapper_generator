@@ -1,0 +1,5 @@
+name: webidl_generator
+description: Generate wrappers from webidl
+dependencies:
+ path: any
+ logging: any

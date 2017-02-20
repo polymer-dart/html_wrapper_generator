@@ -1,0 +1,1 @@
+[{"type":"dictionary","name":"KeyIdsInitData","partial":false,"members":[{"type":"field","name":"kids","required":true,"idlType":{"sequence":true,"generic":"sequence","nullable":false,"array":false,"union":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"DOMString"}},"extAttrs":[]}],"inheritance":null,"extAttrs":[]}]

@@ -1,0 +1,1 @@
+[{"type":"interface","name":"SVGMPathElement","partial":false,"members":[],"inheritance":"SVGElement","extAttrs":[]},{"type":"implements","target":"SVGMPathElement","implements":"SVGURIReference","extAttrs":[]}]

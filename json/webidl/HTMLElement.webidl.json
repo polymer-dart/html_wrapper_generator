@@ -1,0 +1,641 @@
+[{
+  "type": "interface",
+  "name": "HTMLElement",
+  "partial": false,
+  "members": [{
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "title",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "lang",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "dir",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMStringMap"
+    },
+    "name": "dataset",
+    "extAttrs": [{
+      "name": "Constant",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "innerText",
+    "extAttrs": [{
+      "name": "GetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }, {
+      "name": "TreatNullAs",
+      "arguments": null,
+      "rhs": {
+        "type": "identifier",
+        "value": "EmptyString"
+      }
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "boolean"
+    },
+    "name": "hidden",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "operation",
+    "getter": false,
+    "setter": false,
+    "creator": false,
+    "deleter": false,
+    "legacycaller": false,
+    "static": false,
+    "stringifier": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "void"
+    },
+    "name": "click",
+    "arguments": [],
+    "extAttrs": [{
+      "name": "NeedsCallerType",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "long"
+    },
+    "name": "tabIndex",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "operation",
+    "getter": false,
+    "setter": false,
+    "creator": false,
+    "deleter": false,
+    "legacycaller": false,
+    "static": false,
+    "stringifier": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "void"
+    },
+    "name": "focus",
+    "arguments": [],
+    "extAttrs": [{
+      "name": "Throws",
+      "arguments": null
+    }]
+  }, {
+    "type": "operation",
+    "getter": false,
+    "setter": false,
+    "creator": false,
+    "deleter": false,
+    "legacycaller": false,
+    "static": false,
+    "stringifier": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "void"
+    },
+    "name": "blur",
+    "arguments": [],
+    "extAttrs": [{
+      "name": "Throws",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "accessKey",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "accessKeyLabel",
+    "extAttrs": [{
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "boolean"
+    },
+    "name": "draggable",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "contentEditable",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "boolean"
+    },
+    "name": "isContentEditable",
+    "extAttrs": [{
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": true,
+      "array": false,
+      "union": false,
+      "idlType": "HTMLMenuElement"
+    },
+    "name": "contextMenu",
+    "extAttrs": [{
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "boolean"
+    },
+    "name": "spellcheck",
+    "extAttrs": [{
+      "name": "SetterThrows",
+      "arguments": null
+    }, {
+      "name": "Pure",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "CSSStyleDeclaration"
+    },
+    "name": "style",
+    "extAttrs": [{
+      "name": "PutForwards",
+      "arguments": null,
+      "rhs": {
+        "type": "identifier",
+        "value": "cssText"
+      }
+    }, {
+      "name": "Constant",
+      "arguments": null
+    }]
+  }],
+  "inheritance": "Element",
+  "extAttrs": [{
+    "name": "HTMLConstructor",
+    "arguments": null
+  }]
+}, {
+  "type": "interface",
+  "name": "HTMLElement",
+  "partial": true,
+  "members": [{
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": true,
+      "array": false,
+      "union": false,
+      "idlType": "Element"
+    },
+    "name": "offsetParent",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "long"
+    },
+    "name": "offsetTop",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "long"
+    },
+    "name": "offsetLeft",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "long"
+    },
+    "name": "offsetWidth",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "long"
+    },
+    "name": "offsetHeight",
+    "extAttrs": []
+  }],
+  "extAttrs": []
+}, {
+  "type": "interface",
+  "name": "HTMLElement",
+  "partial": true,
+  "members": [{
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "boolean"
+    },
+    "name": "scrollgrab",
+    "extAttrs": [{
+      "name": "Func",
+      "arguments": null,
+      "rhs": {
+        "type": "string",
+        "value": "\"nsGenericHTMLElement::IsScrollGrabAllowed\""
+      }
+    }]
+  }],
+  "extAttrs": []
+}, {
+  "type": "interface",
+  "name": "TouchEventHandlers",
+  "partial": false,
+  "members": [{
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "EventHandler"
+    },
+    "name": "ontouchstart",
+    "extAttrs": [{
+      "name": "Func",
+      "arguments": null,
+      "rhs": {
+        "type": "string",
+        "value": "\"nsGenericHTMLElement::TouchEventsEnabled\""
+      }
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "EventHandler"
+    },
+    "name": "ontouchend",
+    "extAttrs": [{
+      "name": "Func",
+      "arguments": null,
+      "rhs": {
+        "type": "string",
+        "value": "\"nsGenericHTMLElement::TouchEventsEnabled\""
+      }
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "EventHandler"
+    },
+    "name": "ontouchmove",
+    "extAttrs": [{
+      "name": "Func",
+      "arguments": null,
+      "rhs": {
+        "type": "string",
+        "value": "\"nsGenericHTMLElement::TouchEventsEnabled\""
+      }
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "EventHandler"
+    },
+    "name": "ontouchcancel",
+    "extAttrs": [{
+      "name": "Func",
+      "arguments": null,
+      "rhs": {
+        "type": "string",
+        "value": "\"nsGenericHTMLElement::TouchEventsEnabled\""
+      }
+    }]
+  }],
+  "inheritance": null,
+  "extAttrs": [{
+    "name": "NoInterfaceObject",
+    "arguments": null
+  }]
+}, {
+  "type": "implements",
+  "target": "HTMLElement",
+  "implements": "GlobalEventHandlers",
+  "extAttrs": []
+}, {
+  "type": "implements",
+  "target": "HTMLElement",
+  "implements": "DocumentAndElementEventHandlers",
+  "extAttrs": []
+}, {
+  "type": "implements",
+  "target": "HTMLElement",
+  "implements": "TouchEventHandlers",
+  "extAttrs": []
+}, {
+  "type": "implements",
+  "target": "HTMLElement",
+  "implements": "OnErrorEventHandlerForNodes",
+  "extAttrs": []
+}, {
+  "type": "interface",
+  "name": "HTMLUnknownElement",
+  "partial": false,
+  "members": [],
+  "inheritance": "HTMLElement",
+  "extAttrs": []
+}]
