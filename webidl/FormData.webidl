@@ -13,16 +13,24 @@ typedef (Blob or Directory or USVString) FormDataEntryValue;
  Exposed=(Window,Worker)]
 interface FormData {
   [Throws]
+  void append(USVString name,  any value, optional USVString filename);
+/*
+  [Throws]
   void append(USVString name, Blob value, optional USVString filename);
   [Throws]
   void append(USVString name, USVString value);
+*/
   void delete(USVString name);
   FormDataEntryValue? get(USVString name);
   sequence<FormDataEntryValue> getAll(USVString name);
   boolean has(USVString name);
   [Throws]
+  void set(USVString name, any value, optional USVString filename);
+/*
+  [Throws]
   void set(USVString name, Blob value, optional USVString filename);
   [Throws]
   void set(USVString name, USVString value);
+*/
   iterable<USVString, FormDataEntryValue>;
 };

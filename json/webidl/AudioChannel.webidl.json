@@ -1,0 +1,1 @@
+[{"type":"enum","name":"AudioChannel","values":["normal","content","notification","alarm","telephony","ringer","publicnotification","system"],"extAttrs":[]}]

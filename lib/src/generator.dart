@@ -16,7 +16,7 @@ class TypeManager {
 
   void addEnum(Map def) {
     _logger.fine("Mapping ${def} -> String");
-    typedefs[def['name']] = ()=> "String"; // Better way to map this ?
+    typedefs[def['name']] = () => "String"; // Better way to map this ?
   }
 
   String translateType(Map type,
@@ -60,6 +60,8 @@ class TypeManager {
             'Float32Array': 'var',
             'Float64Array': 'var',
             'USVString': 'String',
+            'Date':'DateTime',
+            'ByteString' : 'String',
           }[type['idlType']] ??
           type['idlType'];
     }
@@ -289,7 +291,8 @@ Future generateAll(String folderPath) async {
     stderr.writeln("OK");
   }
 
-  for (Generator def in interfaces.values) {
+  for (String k in interfaces.keys.toList()..sort()) {
+    Generator def = interfaces[k];
     await stdout
         .addStream(def.generate(typeManager).transform(new Utf8Encoder()));
 

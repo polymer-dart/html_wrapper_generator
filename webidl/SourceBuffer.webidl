@@ -37,9 +37,13 @@ interface SourceBuffer : EventTarget {
   attribute EventHandler onerror;
   attribute EventHandler onabort;
   [Throws]
+  void appendBuffer(any data);
+/*
+  [Throws]
   void appendBuffer(ArrayBuffer data);
   [Throws]
   void appendBuffer(ArrayBufferView data);
+*/
   //[Throws]
   //void appendStream(Stream stream, [EnforceRange] optional unsigned long long maxSize);
   [Throws]
