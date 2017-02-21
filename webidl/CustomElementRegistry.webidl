@@ -6,7 +6,7 @@
 [Func="CustomElementRegistry::IsCustomElementEnabled"]
 interface CustomElementRegistry {
   [Throws]
-  void define(DOMString name, Function functionConstructor,
+  void define(DOMString name, any functionConstructor,
               optional ElementDefinitionOptions options);
   any get(DOMString name);
   [Throws]

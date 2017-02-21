@@ -60,8 +60,8 @@ class TypeManager {
             'Float32Array': 'var',
             'Float64Array': 'var',
             'USVString': 'String',
-            'Date':'DateTime',
-            'ByteString' : 'String',
+            'Date': 'DateTime',
+            'ByteString': 'String',
           }[type['idlType']] ??
           type['idlType'];
     }
@@ -76,10 +76,26 @@ class TypeManager {
     return res;
   }
 
-  String argumentList(List args) => args
-      .map((arg) =>
-          "${translateType(arg['idlType'])} ${sanitizeName(arg['name'])}")
-      .join(',');
+  String toArg(arg) =>
+      "${translateType(arg['idlType'])} ${sanitizeName(arg['name'])}";
+
+  String argumentList(List args) {
+    int nonOpt = 0;
+    if (args.every((arg) {
+      if (arg['optional']) {
+        return false;
+      }
+      nonOpt++;
+      return true;
+    })) {
+      return args.map(toArg).join(',');
+    } else {
+      return [
+        args.sublist(0, nonOpt).map(toArg).join(','),
+        "[" + args.sublist(nonOpt).map(toArg).join(',') + "]"
+      ].where((x) => x.isNotEmpty).join(',');
+    }
+  }
 }
 
 String sanitizeName(String name) =>
@@ -199,14 +215,21 @@ class InterfaceDef implements Generator {
     String type = member['type'];
 
     if (type == 'attribute') {
-      String name = member['name'];
-      name = sanitizeName(name);
+      String name;
+      String origName = member['name'];
+      name = sanitizeName(origName);
       String type;
       Map idlType = (member['idlType'] ?? {});
       type = typeManager.translateType(idlType);
       String returnType = type == 'var' ? '' : type;
+      if (name != origName) {
+        yield "    @JS('${origName}')\n";
+      }
       yield "    external ${returnType} get ${name};\n";
       if (!(member['readonly'] ?? false)) {
+        if (name != origName) {
+          yield "    @JS('${origName}')\n";
+        }
         yield "    external set ${name} (${type} val);\n";
       }
     } else if (type == 'operation') {
@@ -261,14 +284,21 @@ class DictionaryDef implements Generator {
     String type = member['type'];
 
     if (type == 'field') {
-      String name = member['name'];
-      name = sanitizeName(name);
+      String origName = member['name'];
+      String name;
+      name = sanitizeName(origName);
       String type;
       Map idlType = (member['idlType'] ?? {});
       type = typeManager.translateType(idlType);
       String returnType = type == 'var' ? '' : type;
+      if (name != origName) {
+        yield "    @JS('${origName}')\n";
+      }
       yield "    external ${returnType} get ${name};\n";
       if (!(member['readonly'] ?? false)) {
+        if (name != origName) {
+          yield "    @JS('${origName}')\n";
+        }
         yield "    external set ${name} (${type} val);\n";
       }
     } else if (type == 'operation') {
