@@ -329,6 +329,11 @@ Future generateAll(String folderPath) async {
     stdout.writeln();
   }
 
+  stdout.writeln("const INTERFACES = const [");
+  interfaces.keys.where((k) => interfaces[k] is InterfaceDef).forEach((k) => stdout.writeln("   '${k}',"));
+  stdout.writeln("];");
+    
+
   stdout.flush();
 }
 
