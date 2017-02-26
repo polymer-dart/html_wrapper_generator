@@ -81,6 +81,9 @@ class TypeManager {
 
   String argumentList(List args) {
     int nonOpt = 0;
+    if (args==null) {
+      return "";
+    }
     if (args.every((arg) {
       if (arg['optional']) {
         return false;
@@ -181,13 +184,18 @@ class InterfaceDef implements Generator {
 
   Stream<String> generate(TypeManager manager) async* {
     yield "@JS('$name')\n";
-    yield "class ${name}";
-    if (inherits == null && implementz.isNotEmpty) {
-      inherits = "Object";
+    yield "abstract class ${name}";
+    
+    List all=[];
+    if (inherits!=null) {
+      all.add(inherits);
     }
+    all.addAll(implementz);
+
     if (inherits != null) {
-      yield " extends ${inherits}";
+      yield " implements ${all.join(',')}";
     }
+    /*
     if (implementz.isNotEmpty) {
       String conj = " with ";
 
@@ -196,12 +204,23 @@ class InterfaceDef implements Generator {
         yield imp;
         conj = ", ";
       }
-    }
+    }*/
     yield " {\n";
+
+    yield* generateConstructor(manager);
 
     yield* generateAttributes(manager);
 
     yield "}\n";
+  }
+
+  Stream<String> generateConstructor(TypeManager manager) async* {
+    for (Map arg in extAttrs) {
+      if (arg['name']=='Constructor') {
+        yield "    external factory ${name}(${manager.argumentList(arg['arguments'])});\n";
+        break;
+      }
+    }
   }
 
   Stream<String> generateAttributes(TypeManager typeManager) async* {
@@ -332,7 +351,7 @@ Future generateAll(String folderPath) async {
   stdout.writeln("const INTERFACES = const [");
   interfaces.keys.where((k) => interfaces[k] is InterfaceDef).forEach((k) => stdout.writeln("   '${k}',"));
   stdout.writeln("];");
-    
+
 
   stdout.flush();
 }

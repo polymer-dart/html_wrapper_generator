@@ -10,9 +10,9 @@
  * liability, trademark and document use rules apply.
  */
 
-interface InputStream;
-interface MozChannel;
-interface IID;
+//interface InputStream;
+//interface MozChannel;
+//interface IID;
 
 enum XMLHttpRequestResponseType {
   "",
@@ -69,10 +69,10 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
   readonly attribute unsigned short readyState;
 
   // request
+//  [Throws]
+//  void open(ByteString method, USVString url);
   [Throws]
-  void open(ByteString method, USVString url);
-  [Throws]
-  void open(ByteString method, USVString url, boolean async,
+  void open(ByteString method, USVString url, optional boolean async,
             optional USVString? user=null, optional USVString? password=null);
   [Throws]
   void setRequestHeader(ByteString header, ByteString value);
@@ -87,23 +87,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
   readonly attribute XMLHttpRequestUpload upload;
 
   [Throws]
-  void send();
-  [Throws]
-  void send(ArrayBuffer data);
-  [Throws]
-  void send(ArrayBufferView data);
-  [Throws]
-  void send(Blob data);
-  [Throws]
-  void send(Document data);
-  [Throws]
-  void send(USVString? data);
-  [Throws]
-  void send(FormData data);
-  [Throws]
-  void send(InputStream data);
-  [Throws]
-  void send(URLSearchParams data);
+  void send(optional var data);
 
   [Throws]
   void abort();
@@ -138,11 +122,7 @@ interface XMLHttpRequest : XMLHttpRequestEventTarget {
 
   // Mozilla-specific stuff
 
-  [ChromeOnly, SetterThrows]
-  attribute boolean mozBackgroundRequest;
 
-  [ChromeOnly, Exposed=Window]
-  readonly attribute MozChannel? channel;
 
   // A platform-specific identifer to represent the network interface 
   // which the HTTP request would occur on.

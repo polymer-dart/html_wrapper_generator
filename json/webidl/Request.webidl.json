@@ -1,1 +1,515 @@
-[{"type":"typedef","typeExtAttrs":[],"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":true,"idlType":[{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"Request"},{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"USVString"}]},"name":"RequestInfo","extAttrs":[]},{"type":"typedef","typeExtAttrs":[],"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"unsigned long"},"name":"nsContentPolicyType","extAttrs":[]},{"type":"interface","name":"Request","partial":false,"members":[{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"ByteString"},"name":"method","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"USVString"},"name":"url","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"Headers"},"name":"headers","extAttrs":[{"name":"SameObject","arguments":null}]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestContext"},"name":"context","extAttrs":[{"name":"Func","arguments":null,"rhs":{"type":"string","value":"\"mozilla::dom::Request::RequestContextEnabled\""}}]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"USVString"},"name":"referrer","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"ReferrerPolicy"},"name":"referrerPolicy","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestMode"},"name":"mode","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestCredentials"},"name":"credentials","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestCache"},"name":"cache","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestRedirect"},"name":"redirect","extAttrs":[]},{"type":"attribute","static":false,"stringifier":false,"inherit":false,"readonly":true,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"DOMString"},"name":"integrity","extAttrs":[]},{"type":"operation","getter":false,"setter":false,"creator":false,"deleter":false,"legacycaller":false,"static":false,"stringifier":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"Request"},"name":"clone","arguments":[],"extAttrs":[{"name":"Throws","arguments":null},{"name":"NewObject","arguments":null}]},{"type":"operation","getter":false,"setter":false,"creator":false,"deleter":false,"legacycaller":false,"static":false,"stringifier":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"void"},"name":"overrideContentPolicyType","arguments":[{"optional":false,"variadic":false,"extAttrs":[],"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"nsContentPolicyType"},"name":"context"}],"extAttrs":[{"name":"ChromeOnly","arguments":null}]}],"inheritance":null,"extAttrs":[{"name":"Constructor","arguments":[{"optional":false,"variadic":false,"extAttrs":[],"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestInfo"},"name":"input"},{"optional":true,"variadic":false,"extAttrs":[],"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestInit"},"name":"init"}]},{"name":"Exposed","arguments":null,"rhs":{"type":"identifier-list","value":["Window","Worker"]}}]},{"type":"implements","target":"Request","implements":"Body","extAttrs":[]},{"type":"dictionary","name":"RequestInit","partial":false,"members":[{"type":"field","name":"method","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"ByteString"},"extAttrs":[]},{"type":"field","name":"headers","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"HeadersInit"},"extAttrs":[]},{"type":"field","name":"body","required":false,"idlType":{"sequence":false,"generic":null,"nullable":true,"array":false,"union":false,"idlType":"BodyInit"},"extAttrs":[]},{"type":"field","name":"referrer","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"USVString"},"extAttrs":[]},{"type":"field","name":"referrerPolicy","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"ReferrerPolicy"},"extAttrs":[]},{"type":"field","name":"mode","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestMode"},"extAttrs":[]},{"type":"field","name":"credentials","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestCredentials"},"extAttrs":[]},{"type":"field","name":"cache","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestCache"},"extAttrs":[]},{"type":"field","name":"redirect","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"RequestRedirect"},"extAttrs":[]},{"type":"field","name":"integrity","required":false,"idlType":{"sequence":false,"generic":null,"nullable":false,"array":false,"union":false,"idlType":"DOMString"},"extAttrs":[]}],"inheritance":null,"extAttrs":[]},{"type":"enum","name":"RequestContext","values":["audio","beacon","cspreport","download","embed","eventsource","favicon","fetch","font","form","frame","hyperlink","iframe","image","imageset","import","internal","location","manifest","object","ping","plugin","prefetch","script","sharedworker","subresource","style","track","video","worker","xmlhttprequest","xslt"],"extAttrs":[]},{"type":"enum","name":"RequestMode","values":["same-origin","no-cors","cors","navigate"],"extAttrs":[]},{"type":"enum","name":"RequestCredentials","values":["omit","same-origin","include"],"extAttrs":[]},{"type":"enum","name":"RequestCache","values":["default","no-store","reload","no-cache","force-cache","only-if-cached"],"extAttrs":[]},{"type":"enum","name":"RequestRedirect","values":["follow","error","manual"],"extAttrs":[]},{"type":"enum","name":"ReferrerPolicy","values":["","no-referrer","no-referrer-when-downgrade","origin","origin-when-cross-origin","unsafe-url","same-origin","strict-origin","strict-origin-when-cross-origin"],"extAttrs":[]}]
+[{
+  "type": "typedef",
+  "typeExtAttrs": [],
+  "idlType": {
+    "sequence": false,
+    "generic": null,
+    "nullable": false,
+    "array": false,
+    "union": true,
+    "idlType": [{
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "Request"
+    }, {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "USVString"
+    }]
+  },
+  "name": "RequestInfo",
+  "extAttrs": []
+}, {
+  "type": "typedef",
+  "typeExtAttrs": [],
+  "idlType": {
+    "sequence": false,
+    "generic": null,
+    "nullable": false,
+    "array": false,
+    "union": false,
+    "idlType": "unsigned long"
+  },
+  "name": "nsContentPolicyType",
+  "extAttrs": []
+}, {
+  "type": "interface",
+  "name": "Request",
+  "partial": false,
+  "members": [{
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "ByteString"
+    },
+    "name": "method",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "USVString"
+    },
+    "name": "url",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "Headers"
+    },
+    "name": "headers",
+    "extAttrs": [{
+      "name": "SameObject",
+      "arguments": null
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestContext"
+    },
+    "name": "context",
+    "extAttrs": [{
+      "name": "Func",
+      "arguments": null,
+      "rhs": {
+        "type": "string",
+        "value": "\"mozilla::dom::Request::RequestContextEnabled\""
+      }
+    }]
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "USVString"
+    },
+    "name": "referrer",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "ReferrerPolicy"
+    },
+    "name": "referrerPolicy",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestMode"
+    },
+    "name": "mode",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestCredentials"
+    },
+    "name": "credentials",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestCache"
+    },
+    "name": "cache",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestRedirect"
+    },
+    "name": "redirect",
+    "extAttrs": []
+  }, {
+    "type": "attribute",
+    "static": false,
+    "stringifier": false,
+    "inherit": false,
+    "readonly": true,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "name": "integrity",
+    "extAttrs": []
+  }, {
+    "type": "operation",
+    "getter": false,
+    "setter": false,
+    "creator": false,
+    "deleter": false,
+    "legacycaller": false,
+    "static": false,
+    "stringifier": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "Request"
+    },
+    "name": "clone",
+    "arguments": [],
+    "extAttrs": [{
+      "name": "Throws",
+      "arguments": null
+    }, {
+      "name": "NewObject",
+      "arguments": null
+    }]
+  }, {
+    "type": "operation",
+    "getter": false,
+    "setter": false,
+    "creator": false,
+    "deleter": false,
+    "legacycaller": false,
+    "static": false,
+    "stringifier": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "void"
+    },
+    "name": "overrideContentPolicyType",
+    "arguments": [{
+      "optional": false,
+      "variadic": false,
+      "extAttrs": [],
+      "idlType": {
+        "sequence": false,
+        "generic": null,
+        "nullable": false,
+        "array": false,
+        "union": false,
+        "idlType": "nsContentPolicyType"
+      },
+      "name": "context"
+    }],
+    "extAttrs": [{
+      "name": "ChromeOnly",
+      "arguments": null
+    }]
+  }],
+  "inheritance": null,
+  "extAttrs": [{
+    "name": "Constructor",
+    "arguments": [{
+      "optional": false,
+      "variadic": false,
+      "extAttrs": [],
+      "idlType": {
+        "sequence": false,
+        "generic": null,
+        "nullable": false,
+        "array": false,
+        "union": false,
+        "idlType": "RequestInfo"
+      },
+      "name": "input"
+    }, {
+      "optional": true,
+      "variadic": false,
+      "extAttrs": [],
+      "idlType": {
+        "sequence": false,
+        "generic": null,
+        "nullable": false,
+        "array": false,
+        "union": false,
+        "idlType": "RequestInit"
+      },
+      "name": "init"
+    }]
+  }, {
+    "name": "Exposed",
+    "arguments": null,
+    "rhs": {
+      "type": "identifier-list",
+      "value": ["Window", "Worker"]
+    }
+  }]
+}, {
+  "type": "implements",
+  "target": "Request",
+  "implements": "Body",
+  "extAttrs": []
+}, {
+  "type": "dictionary",
+  "name": "RequestInit",
+  "partial": false,
+  "members": [{
+    "type": "field",
+    "name": "method",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "ByteString"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "headers",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "HeadersInit"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "body",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": true,
+      "array": false,
+      "union": false,
+      "idlType": "BodyInit"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "referrer",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "USVString"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "referrerPolicy",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "ReferrerPolicy"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "mode",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestMode"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "credentials",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestCredentials"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "cache",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestCache"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "redirect",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "RequestRedirect"
+    },
+    "extAttrs": []
+  }, {
+    "type": "field",
+    "name": "integrity",
+    "required": false,
+    "idlType": {
+      "sequence": false,
+      "generic": null,
+      "nullable": false,
+      "array": false,
+      "union": false,
+      "idlType": "DOMString"
+    },
+    "extAttrs": []
+  }],
+  "inheritance": null,
+  "extAttrs": []
+}, {
+  "type": "enum",
+  "name": "RequestContext",
+  "values": ["audio", "beacon", "cspreport", "download", "embed",
+    "eventsource", "favicon", "fetch", "font", "form", "frame", "hyperlink",
+    "iframe", "image", "imageset", "import", "internal", "location",
+    "manifest", "object", "ping", "plugin", "prefetch", "script",
+    "sharedworker", "subresource", "style", "track", "video", "worker",
+    "xmlhttprequest", "xslt"
+  ],
+  "extAttrs": []
+}, {
+  "type": "enum",
+  "name": "RequestMode",
+  "values": ["same-origin", "no-cors", "cors", "navigate"],
+  "extAttrs": []
+}, {
+  "type": "enum",
+  "name": "RequestCredentials",
+  "values": ["omit", "same-origin", "include"],
+  "extAttrs": []
+}, {
+  "type": "enum",
+  "name": "RequestCache",
+  "values": ["default", "no-store", "reload", "no-cache", "force-cache",
+    "only-if-cached"
+  ],
+  "extAttrs": []
+}, {
+  "type": "enum",
+  "name": "RequestRedirect",
+  "values": ["follow", "error", "manual"],
+  "extAttrs": []
+}, {
+  "type": "enum",
+  "name": "ReferrerPolicy",
+  "values": ["", "no-referrer", "no-referrer-when-downgrade", "origin",
+    "origin-when-cross-origin", "unsafe-url", "same-origin",
+    "strict-origin", "strict-origin-when-cross-origin"
+  ],
+  "extAttrs": []
+}]
