@@ -242,7 +242,8 @@ class InterfaceDef implements Generator {
       type = typeManager.translateType(idlType);
       String returnType = type == 'var' ? '' : type;
       if (name != origName) {
-        yield "    @JS('${origName}')\n";
+	name='JS\$${origName}';
+    //    yield "    @JS('${origName}')\n";
       }
       yield "    external ${returnType} get ${name};\n";
       if (!(member['readonly'] ?? false)) {
@@ -272,6 +273,7 @@ class DictionaryDef implements Generator {
   }
 
   Stream<String> generate(TypeManager manager) async* {
+    yield "@JS()\n";
     yield "@anonymous\n";
     yield "class ${name}";
     if (inherits != null) {
