@@ -7,7 +7,7 @@
 * https://w3c.github.io/push-api/
 */
 
-interface Principal;
+//interface Principal;
 
 enum PushEncryptionKeyName
 {

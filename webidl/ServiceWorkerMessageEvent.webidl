@@ -35,7 +35,7 @@ interface ServiceWorkerMessageEvent : Event {
   [Constant] readonly attribute (ServiceWorker or MessagePort)? source;
 
   [Constant, Cached, Frozen]
-  readonly attribute sequence<MessagePort> ports;
+  readonly attribute any ports;
 };
 
 dictionary ServiceWorkerMessageEventInit : EventInit
