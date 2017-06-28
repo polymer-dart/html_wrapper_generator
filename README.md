@@ -1,9 +1,9 @@
- 1. Lanciare generate_json.sh per parsare i webidl e generare tutti i json.
+ 1. launch `generate_json.sh` to parse webidl inside `webidl` folder and generate parsed json
 
- 1. Dopo copiare quelli che interessano in da `json/all/webidl` a `json/webidl` e lanciare 
+ 1. Examine the result inside `json/all/webidl` and move selected jsons to `json/webidl`, then launch
 
     dart bin/generate.dart json/webidl.all > html_gen.dart
 
- 1. Infine copiare il file nella lib html5
+ 1. Replace `html_gen.dart` in `html5` library
 
 

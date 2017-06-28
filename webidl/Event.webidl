@@ -45,6 +45,9 @@ interface Event {
   [Pure]
   readonly attribute boolean composed;
 
+  /* https://dom.spec.whatwg.org/#dom-event-composedpath */
+  sequence<EventTarget> composedPath();
+
   [Unforgeable, Pure]
   readonly attribute boolean isTrusted;
   [Pure]
