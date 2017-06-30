@@ -2,7 +2,7 @@
 
  1. Examine the result inside `json/all/webidl` and move selected jsons to `json/webidl`, then launch
 
-    dart bin/generate.dart json/webidl.all > html_gen.dart
+    dart bin/generate.dart json/webidl > html_gen.dart
 
  1. Replace `html_gen.dart` in `html5` library
 
