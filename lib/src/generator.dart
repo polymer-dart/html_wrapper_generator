@@ -81,7 +81,7 @@ class TypeManager {
 
   String argumentList(List args) {
     int nonOpt = 0;
-    if (args==null) {
+    if (args == null) {
       return "";
     }
     if (args.every((arg) {
@@ -107,6 +107,7 @@ String sanitizeName(String name) =>
       'continue': 'doContinue',
       'is': 'IS',
       'extends': 'Extends',
+      'assert' : '\$assert',
       'MozSelfSupport': 'mozSelfSupport',
     }[name] ??
     name;
@@ -142,19 +143,36 @@ Stream<String> generateOperation(TypeManager typeManager, member,
 }
 
 abstract class Generator {
+  String namespace;
   Stream<String> generate(TypeManager manager);
 
-  factory Generator(def) {
+  factory Generator(def, {String namespace}) {
     if (def['type'] == 'callback') {
-      return new CallbackGenerator(def);
+      return new CallbackGenerator(def)..namespace = namespace;
     } else if (def['type'] == 'typedef') {
-      return new TypedefGeneretor(def);
+      return new TypedefGeneretor(def)..namespace = namespace;
+    } else if (def['type'] == 'operation') {
+      return new OperationGenerator(def)..namespace = namespace;
     }
     return null;
   }
 }
 
+class OperationGenerator implements Generator {
+  String namespace;
+  Map def;
+
+  OperationGenerator(this.def);
+
+  Stream<String> generate(TypeManager manager) async* {
+    yield '@JS("${namespace}${def['name']}")\n';
+    yield 'external ';
+    yield* generateOperation(manager, def);
+  }
+}
+
 class CallbackGenerator implements Generator {
+  String namespace;
   Map def;
 
   CallbackGenerator(this.def);
@@ -166,6 +184,7 @@ class CallbackGenerator implements Generator {
 }
 
 class TypedefGeneretor implements Generator {
+  String namespace;
   Map def;
   TypedefGeneretor(this.def);
 
@@ -176,6 +195,7 @@ class TypedefGeneretor implements Generator {
 }
 
 class InterfaceDef implements Generator {
+  String namespace;
   String name;
   String inherits;
   List extAttrs = [];
@@ -185,9 +205,9 @@ class InterfaceDef implements Generator {
   Stream<String> generate(TypeManager manager) async* {
     yield "@JS('$name')\n";
     yield "abstract class ${name}";
-    
-    List all=[];
-    if (inherits!=null) {
+
+    List all = [];
+    if (inherits != null) {
       all.add(inherits);
     }
     all.addAll(implementz);
@@ -216,7 +236,7 @@ class InterfaceDef implements Generator {
 
   Stream<String> generateConstructor(TypeManager manager) async* {
     for (Map arg in extAttrs) {
-      if (arg['name']=='Constructor') {
+      if (arg['name'] == 'Constructor') {
         yield "    external factory ${name}(${manager.argumentList(arg['arguments'])});\n";
         break;
       }
@@ -242,8 +262,8 @@ class InterfaceDef implements Generator {
       type = typeManager.translateType(idlType);
       String returnType = type == 'var' ? '' : type;
       if (name != origName) {
-	name='JS\$${origName}';
-    //    yield "    @JS('${origName}')\n";
+        name = 'JS\$${origName}';
+        //    yield "    @JS('${origName}')\n";
       }
       yield "    external ${returnType} get ${name};\n";
       if (!(member['readonly'] ?? false)) {
@@ -259,6 +279,7 @@ class InterfaceDef implements Generator {
 }
 
 class DictionaryDef implements Generator {
+  String namespace;
   String name;
   String inherits;
   List extAttrs = [];
@@ -351,9 +372,10 @@ Future generateAll(String folderPath) async {
   }
 
   stdout.writeln("const INTERFACES = const [");
-  interfaces.keys.where((k) => interfaces[k] is InterfaceDef).forEach((k) => stdout.writeln("   '${k}',"));
+  interfaces.keys
+      .where((k) => interfaces[k] is InterfaceDef)
+      .forEach((k) => stdout.writeln("   '${k}',"));
   stdout.writeln("];");
-
 
   stdout.flush();
 }
@@ -365,10 +387,11 @@ Future collect(String webIdlPath, Map<String, Generator> interfaces,
 }
 
 void mergeInterfaces(
-    var webidlJson, Map<String, Generator> res, TypeManager typeManager) {
+    var webidlJson, Map<String, Generator> res, TypeManager typeManager,
+    {String namespacePrefix: ""}) {
   webidlJson.forEach((Map<String, dynamic> record) {
     String type = record['type'];
-    String name = record['name'];
+    String name = '${namespacePrefix}${record['name']}';
     if (type == 'interface') {
       InterfaceDef def =
           res.putIfAbsent(name, () => new InterfaceDef()..name = name);
@@ -383,14 +406,18 @@ void mergeInterfaces(
       InterfaceDef def =
           res.putIfAbsent(target, () => new InterfaceDef()..name = target);
       def.implementz.add(record['implements']);
-    } else if (type == 'callback') {
-      res[name] = new Generator(record);
+    } else if (type == 'callback' || type == 'operation') {
+      res[name] = new Generator(record, namespace: namespacePrefix);
     } else if (type == 'typedef') {
       typeManager.addTypedef(record);
     } else if (type == 'dictionary') {
       res[name] = new DictionaryDef(record);
     } else if (type == 'enum') {
       typeManager.addEnum(record);
+    } else if (type == 'namespace') {
+      String namespace = namespacePrefix + record['name'];
+      mergeInterfaces(record['members'], res, typeManager,
+          namespacePrefix: namespace + '.');
     }
   });
 }
