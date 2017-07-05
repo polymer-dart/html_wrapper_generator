@@ -41,7 +41,7 @@ interface MessageEvent : Event {
    * data, origin, source, and lastEventId attributes of this appropriately.
    */
   [Pure, Cached, Frozen]
-  readonly attribute sequence<MessagePort> ports;
+  readonly attribute sequence ports;
 
   void initMessageEvent(DOMString type, boolean bubbles, boolean cancelable,
                         any data, DOMString origin, DOMString lastEventId,
