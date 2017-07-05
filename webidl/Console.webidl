@@ -40,8 +40,8 @@ namespace console {
   [BinaryName="noopMethod"]
   void timelineEnd();
 
-  [ChromeOnly]
-  const boolean IS_NATIVE_CONSOLE = true;
+  //[ChromeOnly]
+  //const boolean IS_NATIVE_CONSOLE = true;
 };
 
 // This is used to propagate console events to the observers.
