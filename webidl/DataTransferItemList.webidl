@@ -11,9 +11,9 @@ interface DataTransferItemList {
   readonly attribute unsigned long length;
   getter DataTransferItem (unsigned long index);
   [Throws, NeedsSubjectPrincipal]
-  DataTransferItem? add(DOMString data, DOMString type);
-  [Throws, NeedsSubjectPrincipal]
-  DataTransferItem? add(File data);
+  DataTransferItem? add(any data, optional DOMString type);
+//  [Throws, NeedsSubjectPrincipal]
+//  DataTransferItem? add(File data);
   [Throws, NeedsSubjectPrincipal]
   void remove(unsigned long index);
   [Throws, NeedsSubjectPrincipal]
