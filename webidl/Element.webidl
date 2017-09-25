@@ -242,6 +242,15 @@ partial interface Element {
   readonly attribute ShadowRoot? shadowRoot;
 };
 
+dictionary ShadowRootInit {
+ String? mode;
+ boolean? delegatesFocus;
+};
+
+partial interface Element {
+  ShadowRoot attachShadow(ShadowRootInit init);
+};
+
 Element implements ChildNode;
 Element implements NonDocumentTypeChildNode;
 Element implements ParentNode;
